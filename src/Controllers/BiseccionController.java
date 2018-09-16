@@ -42,17 +42,20 @@ public class BiseccionController {
         if(biseccionModel.valorInicialEsRaiz()){
             biseccionPanel.setInfoMessage(valorInicial + " es raiz");
             return;
-            
         }   
+        
         if(biseccionModel.valorSiguienteEsRaiz()){
             biseccionPanel.setInfoMessage(valorSiguiente + " es raiz");
             return;
         } 
+        
         if(biseccionModel.intervalInvalido()){
             biseccionPanel.setInfoMessage("no es un intervalo valido");
             return;
         } 
+        
         List<Object[]> result = biseccionModel.calcularRaiz();
+        
         for(int i = 0; i < result.size(); i++ ){
             biseccionPanel.getTableModel().addRow(result.get(i));
         }
