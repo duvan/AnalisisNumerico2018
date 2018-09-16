@@ -5,13 +5,17 @@ package Views.NoLineales;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Controllers.BiseccionController;
+import Model.NumberInputValidator;
+import Model.FunctionEvaluator;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author duvandariobarrientosbetancur
  */
 public class BiseccionView extends javax.swing.JPanel {
-
+   
     /**
      * Creates new form BiseccionView
      */
@@ -19,6 +23,33 @@ public class BiseccionView extends javax.swing.JPanel {
         initComponents();
     }
 
+    public String getValorInicial() {
+        return initialValueTextField.getText();
+    }
+
+    public String getValorSiguiente() {
+        return nextValueTextField.getText();
+    }
+
+    public String getTolerancia() {
+        return toleranceTextField.getText();
+    }
+
+    public String getIteraciones() {
+        return iterationTextField.getText();
+    }
+    
+    public String getFuncion() {
+        return funtionTextField.getText();
+    }
+
+    public void setInfoMessage(String message){
+        infoTextField.setText(message);
+    }
+    public DefaultTableModel getTableModel(){
+        return (DefaultTableModel)jTable1.getModel();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,30 +59,304 @@ public class BiseccionView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        funtionTextField = new javax.swing.JTextField();
+        iterationTextField = new javax.swing.JTextField();
+        toleranceTextField = new javax.swing.JTextField();
+        initialValueTextField = new javax.swing.JTextField();
+        nextValueTextField = new javax.swing.JTextField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        infoTextField = new javax.swing.JTextField();
 
-        jLabel1.setText("Biseccion");
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(820, 730));
+        setPreferredSize(new java.awt.Dimension(830, 720));
+
+        jLabel1.setFont(new java.awt.Font("Waseem", 0, 48)); // NOI18N
+        jLabel1.setText("Bisection");
+
+        jLabel2.setText("Funtion");
+
+        jLabel3.setText("Inatial Value");
+
+        jLabel4.setText("Next Value");
+
+        jLabel5.setText("Iterations");
+
+        jLabel6.setText("Tolerance");
+
+        jButton1.setText("To go");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Helps");
+
+        funtionTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        funtionTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                funtionTextFieldActionPerformed(evt);
+            }
+        });
+
+        iterationTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iterationTextFieldActionPerformed(evt);
+            }
+        });
+        iterationTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                iterationTextFieldKeyTyped(evt);
+            }
+        });
+
+        toleranceTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toleranceTextFieldActionPerformed(evt);
+            }
+        });
+        toleranceTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                toleranceTextFieldKeyTyped(evt);
+            }
+        });
+
+        initialValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                initialValueTextFieldActionPerformed(evt);
+            }
+        });
+        initialValueTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                initialValueTextFieldKeyTyped(evt);
+            }
+        });
+
+        nextValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextValueTextFieldActionPerformed(evt);
+            }
+        });
+        nextValueTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nextValueTextFieldKeyTyped(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Iteration 1", "Xi", "Xf", "Xm", "Ym", "Error"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        infoTextField.setEditable(false);
+        infoTextField.setBorder(null);
+        infoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoTextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nextValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(funtionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(initialValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(iterationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(toleranceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(57, 57, 57))
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+                            .addComponent(infoTextField))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(funtionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(iterationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(toleranceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(initialValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(nextValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(infoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
+
+        toleranceTextField.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        FunctionEvaluator fe = new FunctionEvaluator(funtionTextField.getText());
+        if(fe.isValid(initialValueTextField.getText())){
+            BiseccionController biseccionController = new BiseccionController(this);
+            biseccionController.calcular();
+        }else{
+            setInfoMessage("la funcion no es valida.");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void initialValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initialValueTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_initialValueTextFieldActionPerformed
+
+    private void nextValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextValueTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextValueTextFieldActionPerformed
+
+    private void iterationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iterationTextFieldActionPerformed
+
+    }//GEN-LAST:event_iterationTextFieldActionPerformed
+
+    private void toleranceTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toleranceTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toleranceTextFieldActionPerformed
+
+    private void funtionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funtionTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_funtionTextFieldActionPerformed
+
+    private void infoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_infoTextFieldActionPerformed
+
+    private void iterationTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_iterationTextFieldKeyTyped
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_iterationTextFieldKeyTyped
+
+    private void toleranceTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_toleranceTextFieldKeyTyped
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_toleranceTextFieldKeyTyped
+
+    private void nextValueTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nextValueTextFieldKeyTyped
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_nextValueTextFieldKeyTyped
+
+    private void initialValueTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_initialValueTextFieldKeyTyped
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_initialValueTextFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField funtionTextField;
+    private javax.swing.JTextField infoTextField;
+    private javax.swing.JTextField initialValueTextField;
+    private javax.swing.JTextField iterationTextField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField nextValueTextField;
+    private javax.swing.JTextField toleranceTextField;
     // End of variables declaration//GEN-END:variables
 }
