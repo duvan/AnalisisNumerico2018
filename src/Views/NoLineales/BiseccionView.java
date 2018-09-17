@@ -287,6 +287,7 @@ public class BiseccionView extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         getTableModel().setRowCount(0);
+        infoTextField.setToolTipText("");
         FunctionEvaluator fe = new FunctionEvaluator(funtionTextField.getText());
         if(fe.isValid(initialValueTextField.getText())){
             BiseccionController biseccionController = new BiseccionController(this);

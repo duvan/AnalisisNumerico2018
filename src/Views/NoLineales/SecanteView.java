@@ -168,6 +168,8 @@ public class SecanteView extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        infoTextField.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,6 +290,7 @@ public class SecanteView extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         getTableModel().setRowCount(0);
+        infoTextField.setToolTipText("");
         FunctionEvaluator fe = new FunctionEvaluator(funtionTextField.getText());
         if(fe.isValid(initialValueTextField.getText())){
             SecanteController secanteController = new SecanteController(this);
