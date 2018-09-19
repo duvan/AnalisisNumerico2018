@@ -1,5 +1,10 @@
 package Views.NoLineales;
 
+import Controllers.BusquedasIncrementalesController;
+import Model.FunctionEvaluator;
+import Model.NumberInputValidator;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +23,26 @@ public class BusquedasIncrementalesView extends javax.swing.JPanel {
     public BusquedasIncrementalesView() {
         initComponents();
     }
+    public String getValorInicial() {
+        return initialValueTextField.getText();
+    }
+    public String getDelta() {
+        return deltaTextField.getText();
+    }
+    public String getIteraciones() {
+        return iterationTextField.getText();
+    }
+    
+    public String getFuncion() {
+        return funtionTextField.getText();
+    }
 
+    public void setInfoMessage(String message){
+        infoTextField.setText(message);
+    }
+    public DefaultTableModel getTableModel(){
+        return (DefaultTableModel)jTable1.getModel();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,29 +53,229 @@ public class BusquedasIncrementalesView extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        deltaTextField = new javax.swing.JTextField();
+        iterationTextField = new javax.swing.JTextField();
+        funtionTextField = new javax.swing.JTextField();
+        initialValueTextField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        toGoButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        infoTextField = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Waseem", 0, 36)); // NOI18N
         jLabel1.setText("Busquedas Incrementales");
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 204));
+
+        jLabel2.setText("Funtion");
+
+        jLabel3.setText("Initial Value");
+
+        jLabel4.setText("Delta");
+
+        jLabel5.setText("Iteration");
+
+        deltaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deltaTextFieldActionPerformed(evt);
+            }
+        });
+
+        iterationTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iterationTextFieldActionPerformed(evt);
+            }
+        });
+
+        funtionTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                funtionTextFieldActionPerformed(evt);
+            }
+        });
+
+        initialValueTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                initialValueTextFieldActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Help");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        toGoButton.setText("To go");
+        toGoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toGoButtonActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Iteration", "X", "Error"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        infoTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                infoTextFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(75, 75, 75)
+                .addComponent(toGoButton)
+                .addGap(150, 150, 150))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(funtionTextField)
+                            .addComponent(initialValueTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(deltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(iterationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+                            .addComponent(infoTextField))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(deltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(funtionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(iterationTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(initialValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(toGoButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(infoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void funtionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_funtionTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_funtionTextFieldActionPerformed
+
+    private void initialValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initialValueTextFieldActionPerformed
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_initialValueTextFieldActionPerformed
+
+    private void deltaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deltaTextFieldActionPerformed
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_deltaTextFieldActionPerformed
+
+    private void iterationTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iterationTextFieldActionPerformed
+        NumberInputValidator.validate(evt);
+    }//GEN-LAST:event_iterationTextFieldActionPerformed
+
+    private void toGoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toGoButtonActionPerformed
+        getTableModel().setRowCount(0);
+        infoTextField.setToolTipText("");
+        FunctionEvaluator fe = new FunctionEvaluator(funtionTextField.getText());
+        if(fe.isValid(initialValueTextField.getText())){
+            BusquedasIncrementalesController busquedasIncrementalesController = new BusquedasIncrementalesController(this);
+            busquedasIncrementalesController.calcular();
+        }else{
+            setInfoMessage("la funcion no es valida.");
+        }
+    }//GEN-LAST:event_toGoButtonActionPerformed
+
+    private void infoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_infoTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField deltaTextField;
+    private javax.swing.JTextField funtionTextField;
+    private javax.swing.JTextField infoTextField;
+    private javax.swing.JTextField initialValueTextField;
+    private javax.swing.JTextField iterationTextField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton toGoButton;
     // End of variables declaration//GEN-END:variables
 }
